@@ -33,6 +33,7 @@ export class InstagramProvider extends PureComponent {
         ]).isRequired,
 
         renderBackground: PropTypes.func,
+        style: PropTypes.object
     };
 
     static defaultProps = {};
@@ -100,10 +101,10 @@ export class InstagramProvider extends PureComponent {
     };
 
     render() {
-        const { children } = this.props;
+        const { children, style } = this.props;
 
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, style]}>
                 {children}
                 {this.renderSelectedElement()}
             </View>

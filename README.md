@@ -4,11 +4,10 @@
 
 A component to implement the Instagram Zoom-Draggable-Effect for any component in React-Native.
 
-
 ### Installation
 
 ```shell
-npm i --save https://github.com/postillonmedia/react-native-instagram-zoomable.git
+yarn add https://github.com/TuNguyenThanh/react-native-instagram-zoomable.git
 ```
 
 

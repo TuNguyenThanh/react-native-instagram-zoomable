@@ -85,7 +85,9 @@ export class ElementContainer extends PureComponent {
                     opacity: this._opacity
                 }]}
                 ref={node => (this._parent = node)}
+                onLayout={() => null}
                 {...this._gestureHandler.panHandlers}
+                useNativeDriver
             >
                 { children }
             </Animated.View>
@@ -142,12 +144,13 @@ export class ElementContainer extends PureComponent {
 
         gesturePosition.setOffset({
             x: 0,
-            y: 0,
+            y: (selectedMeasurement && selectedMeasurement.y) || 0,
         });
 
         Animated.timing(this._opacity, {
             toValue: 0,
             duration: 200,
+            useNativeDriver: true
         }).start();
     };
 
@@ -210,7 +213,7 @@ export class ElementContainer extends PureComponent {
         ]).start(() => {
             gesturePosition.setOffset({
                 x: 0,
-                y: 0,
+                y: (this._selectedMeasurement && this._selectedMeasurement.y) || 0,
             });
 
             this._opacity.setValue(1);
@@ -224,7 +227,7 @@ export class ElementContainer extends PureComponent {
     async _measureSelected() {
         let parentMeasurement = await new Promise((resolve, reject) => {
             try {
-                this._parent._component.measureInWindow((winX, winY, winWidth, winHeight) => {
+                this._parent.measureInWindow((winX, winY, winWidth, winHeight) => {
                     resolve({
                         x: winX,
                         y: winY,
